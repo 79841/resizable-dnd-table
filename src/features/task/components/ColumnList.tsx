@@ -5,25 +5,25 @@ import {
 import { Column } from "./Column";
 
 type TColumnListProps = {
-  columnList: string[];
+  columnList: Record<string, string>;
 };
 export const ColumnList = ({ columnList }: TColumnListProps) => {
+  const { id, title, description, status, actions } = columnList;
   return (
     <div className="w-full h-10 border-b">
       <ResizablePanelGroup
         direction="horizontal"
         className="h-full w-full flex items-center"
       >
-        {columnList.map((column, index) => {
-          return (
-            <>
-              <Column key={column} columnName={column} />
-              {columnList.length - 1 !== index && (
-                <ResizableHandle key={`${column}-handle`} className="h-1/2" />
-              )}
-            </>
-          );
-        })}
+        <Column columnName={id} />
+        <ResizableHandle className="h-1/2" />
+        <Column columnName={title} />
+        <ResizableHandle className="h-1/2" />
+        <Column columnName={description} />
+        <ResizableHandle className="h-1/2" />
+        <Column columnName={status} />
+        <ResizableHandle className="h-1/2" />
+        <Column columnName={actions} />
       </ResizablePanelGroup>
     </div>
   );

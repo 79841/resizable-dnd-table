@@ -1,9 +1,12 @@
-import { ColumnRefListContextProvider } from "../contexts/column-ref-list/ColumnRefListContextProvider";
+"use client";
+
+import { ColumnRefListContextProvider } from "../contexts/column-ref-list";
+import { useDragEndTaskHandle } from "../hooks/useDragEndTaskHandle";
 import { ColumnList } from "./ColumnList";
 import { TaskList } from "./TaskList";
 
 export const TaskTable = () => {
-  const taskList = [
+  const tasks = [
     {
       id: "1",
       title: "Title 1",
@@ -47,13 +50,22 @@ export const TaskTable = () => {
       actions: "Actions 6",
     },
   ];
+
+  const columnList: Record<string, string> = {
+    id: "ID",
+    title: "Title",
+    description: "Description",
+    status: "Status",
+    actions: "Actions",
+  };
+
+  const [taskList, handleDragEnd] = useDragEndTaskHandle(tasks);
+
   return (
     <div className="w-full">
       <ColumnRefListContextProvider>
-        <ColumnList
-          columnList={["ID", "Title", "Description", "Status", "Actions"]}
-        />
-        <TaskList taskList={taskList} />
+        <ColumnList columnList={columnList} />
+        <TaskList taskList={taskList} onDragEnd={handleDragEnd} />
       </ColumnRefListContextProvider>
     </div>
   );
