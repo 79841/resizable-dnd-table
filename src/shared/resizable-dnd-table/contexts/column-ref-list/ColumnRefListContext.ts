@@ -1,7 +1,7 @@
 "use client";
 import { RefObject, createContext, useContext } from "react";
 
-export type TColumnRefListContextType = {
+export type ColumnRefListContextType = {
   columnRefList: Record<string, RefObject<HTMLTableCellElement>>;
   addColumnRef: (
     columnName: string,
@@ -9,7 +9,7 @@ export type TColumnRefListContextType = {
   ) => void;
 };
 
-export const ColumnRefListContext = createContext<TColumnRefListContextType>({
+export const ColumnRefListContext = createContext<ColumnRefListContextType>({
   columnRefList: {},
   addColumnRef: (
     columnName: string,

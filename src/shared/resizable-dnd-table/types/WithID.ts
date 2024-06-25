@@ -1,0 +1,3 @@
+type TWithID = {
+  id: string;
+};
