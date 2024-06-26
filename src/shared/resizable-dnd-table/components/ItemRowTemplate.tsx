@@ -1,9 +1,9 @@
+"use client";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ReactNode, memo } from "react";
 
 type ItemRowTemplateProps = {
-  // item?: Item;
   id: string;
   children: ReactNode;
 };

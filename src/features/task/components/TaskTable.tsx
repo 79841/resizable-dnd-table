@@ -1,91 +1,60 @@
-import { ResizableDndTable } from "@/shared/resizable-dnd-table";
+"use client";
+import { items } from "@/data/Items";
+import { Item, ResizableDndTable } from "@/shared/resizable-dnd-table";
+import { Column } from "@/shared/resizable-dnd-table/components/Column";
+import { ColumnList } from "@/shared/resizable-dnd-table/components/ColumnList";
+import { ItemCellTemplate } from "@/shared/resizable-dnd-table/components/ItemCellTemplate";
+import { ItemList } from "@/shared/resizable-dnd-table/components/ItemList";
+import { ItemRowTemplate } from "@/shared/resizable-dnd-table/components/ItemRowTemplate";
+
+type TableRowProps = { item: Item };
+
+const TableRow = ({ item }: TableRowProps) => {
+  return (
+    <ItemRowTemplate id={item.id}>
+      <ItemCellTemplate columnKey="id">
+        <div>{item.id}</div>
+      </ItemCellTemplate>
+      <ItemCellTemplate columnKey="title">
+        <div>{item.title}</div>
+      </ItemCellTemplate>
+      <ItemCellTemplate columnKey="description">
+        <div>{item.description}</div>
+      </ItemCellTemplate>
+      <ItemCellTemplate columnKey="status">
+        <div>{item.status}</div>
+      </ItemCellTemplate>
+      <ItemCellTemplate columnKey="actions">
+        <div>{item.actions}</div>
+      </ItemCellTemplate>
+    </ItemRowTemplate>
+  );
+};
 
 export const TaskTable = () => {
-  const initialItemList = [
-    {
-      id: "1",
-      title: "Title 1",
-      description: "Description 1",
-      status: "Status 1",
-      actions: "Actions 1",
-    },
-    {
-      id: "2",
-      title: "Title 2",
-      description: "Description 2",
-      status: "Status 2",
-      actions: "Actions 2",
-    },
-    {
-      id: "3",
-      title: "Title 3",
-      description: "Description 3",
-      status: "Status 3",
-      actions: "Actions 3",
-    },
-    {
-      id: "4",
-      title: "Title 4",
-      description: "Description 4",
-      status: "Status 4",
-      actions: "Actions 4",
-    },
-    {
-      id: "5",
-      title: "Title 5",
-      description: "Description 5",
-      status: "Status 5",
-      actions: "Actions 5",
-    },
-    // {
-    //   id: "6",
-    //   title: "Title 6",
-    //   description: "Description 6",
-    //   status: "Status 6",
-    //   actions: "Actions 6",
-    // },
-    // {
-    //   id: "11",
-    //   title: "Title 1",
-    //   description: "Description 1",
-    //   status: "Status 1",
-    //   actions: "Actions 1",
-    // },
-    // {
-    //   id: "12",
-    //   title: "Title 2",
-    //   description: "Description 2",
-    //   status: "Status 2",
-    //   actions: "Actions 2",
-    // },
-    // {
-    //   id: "13",
-    //   title: "Title 3",
-    //   description: "Description 3",
-    //   status: "Status 3",
-    //   actions: "Actions 3",
-    // },
-    // {
-    //   id: "14",
-    //   title: "Title 4",
-    //   description: "Description 4",
-    //   status: "Status 4",
-    //   actions: "Actions 4",
-    // },
-    // {
-    //   id: "15",
-    //   title: "Title 5",
-    //   description: "Description 5",
-    //   status: "Status 5",
-    //   actions: "Actions 5",
-    // },
-    // {
-    //   id: "16",
-    //   title: "Title 6",
-    //   description: "Description 6",
-    //   status: "Status 6",
-    //   actions: "Actions 6",
-    // },
-  ];
-  return <ResizableDndTable initialItemList={initialItemList} />;
+  return (
+    <ResizableDndTable>
+      <ColumnList>
+        <Column columnKey="id" defaultSize={20}>
+          ID
+        </Column>
+        <Column columnKey="title" defaultSize={20}>
+          Title
+        </Column>
+        <Column columnKey="description" defaultSize={20}>
+          Description
+        </Column>
+        <Column columnKey="status" defaultSize={20}>
+          Status
+        </Column>
+        <Column columnKey="actions" defaultSize={20}>
+          Actions
+        </Column>
+      </ColumnList>
+      <ItemList
+        itemList={items}
+        render={(item: Item) => <TableRow item={item} key={`item-${item.id}`} />}
+      />
+    </ResizableDndTable>
+  );
 };

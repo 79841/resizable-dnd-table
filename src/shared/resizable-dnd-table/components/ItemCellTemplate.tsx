@@ -1,3 +1,4 @@
+"use client";
 import { PropsWithChildren, memo, useEffect, useState } from "react";
 import { Item, useColumnRefListContext } from "..";
 export type ItemCellTemplateProps = {
